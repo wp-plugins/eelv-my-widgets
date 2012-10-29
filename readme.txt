@@ -33,8 +33,12 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+1.1
+Add: Network admin email alert for each creation (optionnal)
+Add: Cache results for better performances
+
 1.0
-Improved performances
+Add: Improved performances
 
 0.1
 plugin creation

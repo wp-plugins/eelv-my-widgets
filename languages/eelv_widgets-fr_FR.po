@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: eelv_widgets\n"
+"POT-Creation-Date: 2012-10-29 15:15+0100\n"
+"PO-Revision-Date: 2012-10-29 15:15+0100\n"
+"Last-Translator: Bastien HO <bastienho@urbancube.fr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../widgets.php:15
+msgid "Personalized widgets"
+msgstr "Widgets personnalis&eacute;s"
+
+#: ../widgets.php:16
+msgid "Personalized widget"
+msgstr "Widget personnalis&eacute;"
+
+#: ../widgets.php:17
+msgid "My widgets"
+msgstr "Mes widgets"
+
+#: ../widgets.php:18
+msgid "Add"
+msgstr "Ajouter"
+
+#: ../widgets.php:19
+msgid "Add a widget"
+msgstr "Ajouter un widget"
+
+#: ../widgets.php:20
+msgid "Edit"
+msgstr "Editer"
+
+#: ../widgets.php:22
+msgid "New widget"
+msgstr "Nouveau widget"
+
+#: ../widgets.php:23
+msgid "View"
+msgstr "Voir"
+
+#: ../widgets.php:24
+msgid "View widget"
+msgstr "Voir le widget"
+
+#: ../widgets.php:25
+msgid "Search Widgets"
+msgstr "Rechercher dans les widgets"
+
+#: ../widgets.php:26
+msgid "No Widget Found"
+msgstr "Aucun widget trouv&eacute;"
+
+#: ../widgets.php:27
+msgid "No Widget Found in Trash"
+msgstr "Aucun widget trouv&eacute; dans la corbeille"
+
+#: ../widgets.php:28
+msgid "Parent Widget"
+msgstr "Widget parent"
+
+#: ../widgets.php:118
+msgid "created"
+msgstr "cr&eacute;&eacute;"
+
+#: ../widgets.php:120
+msgid "updated"
+msgstr "mis &agrave; jour"
+
+#: ../widgets.php:123
+msgid "New widget created and shared"
+msgstr "Nouveau Widget cr&eacute;&eacute; et partag&eacute;"
+
+#: ../widgets.php:123
+msgid "A new widget \"%$1$s\" has been %$2$s and shared : %$3$s"
+msgstr ""
+"Un nouveau widget \"%$1$s\" a &eacute;t&eacute; %$2$s et partag&eacute; : %"
+"$3$s"
+
+#: ../widgets.php:128 ../widgets.php:146
+msgid "Their widgets"
+msgstr "Leurs widgets"
+
+#: ../widgets.php:138
+msgid "Options saved"
+msgstr "Option sauvegard&eacute;e"
+
+#: ../widgets.php:155
+msgid "Configuration "
+msgstr "Configuration"
+
+#: ../widgets.php:161
+msgid "Send an alert for each creation :"
+msgstr "Envoyer une alerte pour chaque cr&eacute;ation :"
+
+#: ../widgets.php:169
+msgid "Keep widgets in cache :"
+msgstr "Garder les widgets en cache :"
+
+#: ../widgets.php:171
+msgid "minute(s)"
+msgstr "minute(s)"
+
+#: ../widgets.php:172
+msgid "value 0 is no-cache"
+msgstr "la valeur 0 d&eacute;sactive le cache"
+
+#: ../widgets.php:179
+msgid "save"
+msgstr "sauvegarder"

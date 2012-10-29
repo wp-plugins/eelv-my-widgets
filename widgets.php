@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr
 Description: create and share your text widgets in a multisites plateform
-Version: 1.0
+Version: 1.1
 Author: Bastien Ho, EELV
 License: CC
 */
@@ -28,28 +28,44 @@ function eelvmkpg(){
     'parent' => __('Parent Widget', 'eelv_widgets' )
  ) );
   
-  
-  global $wpdb; 
-  
-  
-  // select all blogs
-   $sql = "SELECT `blog_id` FROM `$wpdb->blogs` WHERE  `public`=1 AND  `archived` =  '0' AND  `mature` =0 AND  `spam` =0 AND  `deleted` =0 ORDER BY `domain` ";
-   $blogs_list = $wpdb->get_col($wpdb->prepare($sql));
+  $eelv_widgets_admin_cache = abs(get_site_option( 'eelv_widgets_admin_cache'));
+  $eelv_widgets_admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache'));  
 
-  // Construct the query on all blogs 
-  $req="";
-  foreach ($blogs_list as $blog):
-	  $chem = $wpdb->prefix.$blog.'_posts';
-	  if($blog==1) $chem = $wpdb->prefix.'posts';
-  		$req.="SELECT `post_author`, `post_date`, `post_content`,`post_name`,`guid`,`post_title` FROM `".$chem."` WHERE `post_status`='publish' AND `post_type`='eelv_widget'
-	UNION
-	";	 
-  endforeach;  
-  $req=substr($req,0,-7)." ORDER BY `post_title`"; 
-  
-   // Parse all widgets
-  $widget_list = $wpdb->get_results($req);
-  foreach($widget_list as $widget):  
+  if($eelv_widgets_admin_cache == 0 || $eelv_widgets_admin_cache_time==0 || $eelv_widgets_admin_cache_time<time()){	   
+	  global $wpdb; 
+	  
+	  
+	  // select all blogs
+	   $sql = "SELECT `blog_id` FROM `$wpdb->blogs` WHERE  `public`=1 AND  `archived` =  '0' AND  `mature` =0 AND  `spam` =0 AND  `deleted` =0 ORDER BY `domain` ";
+	   $blogs_list = $wpdb->get_col($wpdb->prepare($sql));
+	
+	  // Construct the query on all blogs 
+	  $req="";
+	  foreach ($blogs_list as $blog):
+		  $chem = $wpdb->prefix.$blog.'_posts';
+		  if($blog==1) $chem = $wpdb->prefix.'posts';
+			$req.="(SELECT `post_author`, `post_date`, `post_content`,`post_name`,`guid`,`post_title` FROM `".$chem."` WHERE `post_status`='publish' AND `post_type`='eelv_widget')
+		UNION
+";	 
+	  endforeach;  
+	  $req=substr($req,0,-6)." ORDER BY `post_title`"; 
+	  
+	   // Parse all widgets
+	  $widget_list = $wpdb->get_results($req);
+	  
+	  // Save cache if needed
+	  if($eelv_widgets_admin_cache_time>0){
+		   $eelv_widgets_admin_cache_time = strtotime('+'.$eelv_widgets_admin_cache.'minutes');
+		   update_site_option( 'eelv_widgets_admin_cache',$eelv_widgets_admin_cache_time);
+		   update_site_option( 'eelv_widgets_cache_value',$widget_list);
+	   }
+	  //echo' set cache until '.$eelv_widgets_admin_cache_time.'!';
+  }
+  else{
+	  $widget_list = get_site_option( 'eelv_widgets_cache_value');
+	 //echo' retreive from cache until '.$eelv_widgets_admin_cache_time.' (here is '.time().')';
+  }
+ foreach($widget_list as $widget):  
  	 $widget->uid = str_replace(
 		 array('http://',DOMAIN_CURRENT_SITE,'/','.','?','&','p=','=','post_type','eelv_widget'),
 		 array('','','_','_','','','','','',''),
@@ -82,25 +98,95 @@ add_action( 'init', 'eelvmkpg' );
 /* When the post is saved, saves our custom data */
 function eelv_widgets_save_postdata( $post_id ) {
   if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
-     return;
+     return;	 
 
-  if ( !wp_verify_nonce( $_POST['eelv_widget_noncename'], plugin_basename( __FILE__ ) ) )
+  if ( !wp_verify_nonce( $_POST['eelv_widget_edit_nonce'], plugin_basename( __FILE__ ) ) )
    return ;
 
   if ( 'eelv_widget' != $_POST['post_type'] )
     return;
   
   //alert the administrator
-  // coming soon
-  /*
-  $wdg=get_post($post_id);  
-  $admin_mail=get_option( 'admin_email');
- if($admin_mail){   
+  
+ $wdg=get_post($post_id);  
+ $admin_mail=get_site_option( 'eelv_widgets_admin_surveillance' );   
+ if($admin_mail && !empty($admin_mail)){   
   global $current_user;
   get_currentuserinfo();
-  mail($admin_mail ,__('New widget created and shared','eelv_widgets'),sprintf(__('A new widget "%$1$s" has been created and shared : %$2$s (or being updated, I don\'t really know...)  ','eelv_widgets'),$wdg->post_title,$wdg->guid),"From: ".$current_user->display_name."<".$current_user->user_email.">");
-  }*/
+  
+  $action=__('created','eelv_widgets');
+  if($_POSRT['original_post_status']=='publish'){
+	  $action=__('updated','eelv_widgets');
+  }
+  
+  mail($admin_mail ,__('New widget created and shared','eelv_widgets'),sprintf(__('A new widget "%$1$s" has been %$2$s and shared : %$3$s','eelv_widgets'),$wdg->post_title,$action,$wdg->guid),"From: ".$current_user->display_name."<".$current_user->user_email.">");
+  }
+}
+// Ajout du menu d'option sur le r&eacute;seau
+function eelv_widgets_ajout_network_menu() {
+  add_submenu_page('settings.php', __('Their widgets', 'eelv_widgets' ), __('Their widgets', 'eelv_widgets' ), 'Super Admin', 'eelv_widgets_network_configuration', 'eelv_widgets_network_configuration');
+  //add_submenu_page('tpe', 'Historique', 'Historique', 'Super Admin', 'eelv_tpe_liste', 'tpe_supercommandes_liste');    
 }
 
+function eelv_widgets_network_configuration(){
+  if( $_REQUEST[ 'type' ] == 'update' ) {    
+      update_site_option( 'eelv_widgets_admin_surveillance', $_REQUEST['eelv_widgets_admin_surveillance'] );
+      update_site_option( 'eelv_widgets_admin_cache', $_REQUEST['eelv_widgets_admin_cache'] ); 
+	       
+      ?>
+      <div class="updated"><p><strong><?php _e('Options saved', 'eelv_widget' ); ?></strong></p></div>
+      <?php 
+    }
+   $eelv_widgets_admin_surveillance = get_site_option( 'eelv_widgets_admin_surveillance' );
+   $eelv_widgets_admin_cache = get_site_option( 'eelv_widgets_admin_cache' );
+  ?>  
+        <div class="wrap">
+        <div id="icon-edit" class="icon32 icon32-posts-newsletter"><br/></div>
+        <h2><?=_e('Their widgets', 'eelv_widget' )?></h2>
+        
+    <form name="typeSite" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">  
+    <input type="hidden" name="type" value="update">
+    
+        
+        <table class="widefat" style="margin-top: 1em;">
+            <thead>
+                <tr>
+                  <th scope="col" colspan="2"><?= __( 'Configuration ', 'menu-config' ) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="30%">
+                        <label for="newsletter_default_exp"><?=_e('Send an alert for each creation :', 'eelv_widgets' )?></label>
+                    </td><td>
+                        <input  type="text" name="eelv_widgets_admin_surveillance"  size="60"  id="eelv_widgets_admin_surveillance"  value="<?=$eelv_widgets_admin_surveillance?>" class="wide">
+                   </td>
+                 </tr>
+                 
+                 <tr>
+                    <td width="30%">
+                        <label for="newsletter_default_exp"><?=_e('Keep widgets in cache :', 'eelv_widgets' )?></label>
+                    </td><td>
+                        <input  type="number" name="eelv_widgets_admin_cache"  size="3"  id="eelv_widgets_admin_cache"  value="<?=abs($eelv_widgets_admin_cache)?>" class="wide"><?=_e('minute(s)', 'eelv_widgets' )?>
+                        <em><?=_e('value 0 is no-cache', 'eelv_widgets' )?></em>
+                   </td>
+                 </tr>
+                     
+                 <tr>
+                    <td colspan="2">
+                        <p class="submit">
+                        <input type="submit" name="Submit" value="<?php _e('save', 'eelv_widgets' ) ?>" />
+                        </p>                    
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </form>
+    </div>
+    
+<?php
+}
 
+add_action( 'network_admin_menu', 'eelv_widgets_ajout_network_menu');
 add_action( 'save_post', 'eelv_widgets_save_postdata' );

@@ -33,6 +33,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+1.2
+Fix: Incorrect table prefix used in some case fixed
+
 1.1
 Add: Network admin email alert for each creation (optionnal)
 Add: Cache results for better performances

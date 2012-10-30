@@ -3,12 +3,12 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr
 Description: create and share your text widgets in a multisites plateform
-Version: 1.1
+Version: 1.2
 Author: Bastien Ho, EELV
 License: CC
 */
 function eelvmkpg(){
-	load_plugin_textdomain( 'eelv_widgets', false, 'eelv_widgets/languages' );
+	load_plugin_textdomain( 'eelv_widgets', false, 'eelv-my-widgets/languages' );
 	
 	// Add the post_type for all blogs
   register_post_type('eelv_widget', array(  'label' => 'Widgets','description' => 'creez et publiez vos propres widgets','public' => true,'show_ui' => true,'show_in_menu' => 'themes.php','capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => false,'supports' => array('title','editor','revisions','thumbnail','author',),'labels' => array (
@@ -29,7 +29,7 @@ function eelvmkpg(){
  ) );
   
   $eelv_widgets_admin_cache = abs(get_site_option( 'eelv_widgets_admin_cache'));
-  $eelv_widgets_admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache'));  
+  $eelv_widgets_admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache_time'));  
 
   if($eelv_widgets_admin_cache == 0 || $eelv_widgets_admin_cache_time==0 || $eelv_widgets_admin_cache_time<time()){	   
 	  global $wpdb; 
@@ -42,29 +42,30 @@ function eelvmkpg(){
 	  // Construct the query on all blogs 
 	  $req="";
 	  foreach ($blogs_list as $blog):
-		  $chem = $wpdb->prefix.$blog.'_posts';
-		  if($blog==1) $chem = $wpdb->prefix.'posts';
+		  $chem = $wpdb->base_prefix.$blog.'_posts';
+		  if($blog==1) $chem = $wpdb->base_prefix.'posts';
 			$req.="(SELECT `post_author`, `post_date`, `post_content`,`post_name`,`guid`,`post_title` FROM `".$chem."` WHERE `post_status`='publish' AND `post_type`='eelv_widget')
 		UNION
 ";	 
 	  endforeach;  
 	  $req=substr($req,0,-6)." ORDER BY `post_title`"; 
-	  
+	  //header('Blogs:'.sizeof($blogs_list));
 	   // Parse all widgets
-	  $widget_list = $wpdb->get_results($req);
+	  $widget_list = $wpdb->get_results($req);	  
 	  
 	  // Save cache if needed
 	  if($eelv_widgets_admin_cache_time>0){
 		   $eelv_widgets_admin_cache_time = strtotime('+'.$eelv_widgets_admin_cache.'minutes');
-		   update_site_option( 'eelv_widgets_admin_cache',$eelv_widgets_admin_cache_time);
+		   update_site_option( 'eelv_widgets_admin_cache_time',$eelv_widgets_admin_cache_time);
 		   update_site_option( 'eelv_widgets_cache_value',$widget_list);
 	   }
-	  //echo' set cache until '.$eelv_widgets_admin_cache_time.'!';
+	 //header('Set-Cache:'.$eelv_widgets_admin_cache_time.'');
   }
   else{
 	  $widget_list = get_site_option( 'eelv_widgets_cache_value');
-	 //echo' retreive from cache until '.$eelv_widgets_admin_cache_time.' (here is '.time().')';
+	//header('Retreive-Cache:'.$eelv_widgets_admin_cache_time);
   }
+
  foreach($widget_list as $widget):  
  	 $widget->uid = str_replace(
 		 array('http://',DOMAIN_CURRENT_SITE,'/','.','?','&','p=','=','post_type','eelv_widget'),

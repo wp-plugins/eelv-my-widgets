@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr
 Description: create and share your text widgets in a multisites plateform
-Version: 1.2
+Version: 1.2.1
 Author: Bastien Ho, EELV
 License: CC
 */
@@ -27,7 +27,6 @@ function eelvmkpg(){
     'not_found_in_trash' => __('No Widget Found in Trash', 'eelv_widgets' ),
     'parent' => __('Parent Widget', 'eelv_widgets' )
  ) );
-  
   $eelv_widgets_admin_cache = abs(get_site_option( 'eelv_widgets_admin_cache'));
   $eelv_widgets_admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache_time'));  
 
@@ -54,7 +53,7 @@ function eelvmkpg(){
 	  $widget_list = $wpdb->get_results($req);	  
 	  
 	  // Save cache if needed
-	  if($eelv_widgets_admin_cache_time>0){
+	  if($eelv_widgets_admin_cache>0){
 		   $eelv_widgets_admin_cache_time = strtotime('+'.$eelv_widgets_admin_cache.'minutes');
 		   update_site_option( 'eelv_widgets_admin_cache_time',$eelv_widgets_admin_cache_time);
 		   update_site_option( 'eelv_widgets_cache_value',$widget_list);
@@ -68,29 +67,26 @@ function eelvmkpg(){
 
  foreach($widget_list as $widget):  
  	 $widget->uid = str_replace(
-		 array('http://',DOMAIN_CURRENT_SITE,'/','.','?','&','p=','=','post_type','eelv_widget'),
-		 array('','','_','_','','','','','',''),
+		 array('http://',DOMAIN_CURRENT_SITE,'/','.','?','&','p=','=','post_type','eelv_widget','-'),
+		 array('','','_','_','','','','','','','_'),
 		 html_entity_decode($widget->guid)
 	 );	 
 	 if(substr($widget->uid,0,1)=='_') $widget->uid=str_replace('.','_',DOMAIN_CURRENT_SITE).$widget->uid;
-	 
-	 	$construct='
-          wp_register_sidebar_widget( "eelv_widget'.$widget->uid.'","# '.str_replace('é','e',$widget->post_title).'", "eelv_widget'. $widget->uid.'",array("description" => "'.$widget->uid.' ('.$widget->post_date.') "));          
-          
-          function eelv_widget'. $widget->uid.'($params) {
-            echo $params[\'before_widget\'];
-            echo $params[\'before_title\'];
+	 $widget->uid=trim(str_replace('__','_',$widget->uid));
+	 	$construct='wp_register_sidebar_widget( "eelv_wdg'.$widget->uid.'","# '.str_replace('-',' ',$widget->post_name).'", "ee_wg'. $widget->uid.'_f",array("description" => "'.$widget->uid.' ('.$widget->post_date.') "));
+		function ee_wg'.$widget->uid.'_f($p){
+            echo $p[\'before_widget\'];
+            echo $p[\'before_title\'];
             echo "'.$widget->post_title.'";
-            echo $params[\'after_title\'];
+            echo $p[\'after_title\'];
             echo\'<div class="wigeelv">\'; 
-            echo $params[\'before_content\'];
+            echo $p[\'before_content\'];
             echo "'.str_replace('"','\"',$widget->post_content).'<div class=\"clear\"></div>";
-            echo $params[\'after_content\'];
+            echo $p[\'after_content\'];
             echo\'</div>\';
-            echo $params[\'after_widget\'];
-          }          
-          ';
-		  eval($construct);
+            echo $p[\'after_widget\'];
+          }';
+		 eval($construct);
   endforeach;
  
 }
@@ -123,10 +119,9 @@ function eelv_widgets_save_postdata( $post_id ) {
   mail($admin_mail ,__('New widget created and shared','eelv_widgets'),sprintf(__('A new widget "%$1$s" has been %$2$s and shared : %$3$s','eelv_widgets'),$wdg->post_title,$action,$wdg->guid),"From: ".$current_user->display_name."<".$current_user->user_email.">");
   }
 }
-// Ajout du menu d'option sur le r&eacute;seau
+// Ajout du menu d'option sur le reseau
 function eelv_widgets_ajout_network_menu() {
-  add_submenu_page('settings.php', __('Their widgets', 'eelv_widgets' ), __('Their widgets', 'eelv_widgets' ), 'Super Admin', 'eelv_widgets_network_configuration', 'eelv_widgets_network_configuration');
-  //add_submenu_page('tpe', 'Historique', 'Historique', 'Super Admin', 'eelv_tpe_liste', 'tpe_supercommandes_liste');    
+  add_submenu_page('settings.php', __('Their widgets', 'eelv_widgets' ), __('Their widgets', 'eelv_widgets' ), 'Super Admin', 'eelv_widgets_network_configuration', 'eelv_widgets_network_configuration');   
 }
 
 function eelv_widgets_network_configuration(){

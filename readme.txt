@@ -33,6 +33,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+1.2.1
+Fix: replace bad caracters in sites name
+
 1.2
 Fix: Incorrect table prefix used in some case fixed
 

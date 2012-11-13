@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: EELV My Widgets 
-Plugin URI: http://ecolosites.eelv.fr
+Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
 Version: 1.2.2
-Author: Bastien Ho, EELV
+Author: bastho, EELV
 License: CC
 */
 function eelvmkpg(){

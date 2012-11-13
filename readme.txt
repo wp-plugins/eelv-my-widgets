@@ -1,5 +1,5 @@
 === EELV My Widgets ===
-Contributors: 8457, n4thaniel, ecolosites
+Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widgets
 Requires at least: 3.1

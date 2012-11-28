@@ -1,7 +1,7 @@
 === EELV My Widgets ===
 Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
-Tags: widgets, share, multisites
+Tags: widget, share, multisites
 Requires at least: 3.1
 Tested up to: 3.4
 Stable tag: /trunk

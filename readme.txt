@@ -33,6 +33,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+1.3.1
+Fix: Human date correctly displayed
+
 1.3.0
 Add: Network admin option for hidding old widgets
 Add: Human date displayed for widget creation

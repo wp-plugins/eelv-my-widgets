@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.3.0
+Version: 1.3.1
 Author: bastho, EELV
 License: CC
 */
@@ -50,7 +50,7 @@ function eelvmkpg(){
 	  foreach ($blogs_list as $blog):
 		  $chem = $wpdb->base_prefix.$blog.'_posts';
 		  if($blog==1) $chem = $wpdb->base_prefix.'posts';
-			$req.='(SELECT `post_author`, `post_date`, `post_content`,`post_name`,`guid`,`post_title` FROM `'.$chem.'` WHERE `post_status`=\'publish\' AND `post_type`=\'eelv_widget\' '.$date_limit.') UNION ';	 
+			$req.='(SELECT `post_author`, `post_modified`, `post_content`,`post_name`,`guid`,`post_title` FROM `'.$chem.'` WHERE `post_status`=\'publish\' AND `post_type`=\'eelv_widget\' '.$date_limit.') UNION ';	 
 	  endforeach;  
 	  $req=substr($req,0,-7).' ORDER BY `post_title`'; 
 	  

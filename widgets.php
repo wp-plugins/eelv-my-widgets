@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.3.1
+Version: 1.3.2
 Author: bastho, EELV
 License: CC
 */
@@ -83,9 +83,7 @@ function eelvmkpg(){
             echo "'.str_replace('"','\"',$widget->post_title).'";
             echo $p[\'after_title\'];
             echo\'<div class="wigeelv">\'; 
-            echo $p[\'before_content\'];
             echo "'.str_replace('"','\"',$widget->post_content).'<div class=\"clear\"></div>";
-            echo $p[\'after_content\'];
             echo\'</div>\';
             echo $p[\'after_widget\'];
           }';

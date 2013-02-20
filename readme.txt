@@ -33,6 +33,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+= 1.3.2 =
+* Fix: Bug fix
+
 = 1.3.1 =
 * Fix: Human date correctly displayed
 

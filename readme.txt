@@ -3,7 +3,7 @@ Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
 Requires at least: 3.1
-Tested up to: 3.4
+Tested up to: 3.5.1
 Stable tag: /trunk
 License: CC BY-NC 3.0
 License URI: http://creativecommons.org/licenses/by-nc/3.0/
@@ -32,6 +32,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets.png
 http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
+
+= 1.3.3 =
+* Fix: Bug fix
 
 = 1.3.2 =
 * Fix: Bug fix

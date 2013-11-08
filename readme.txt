@@ -2,8 +2,8 @@
 Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
-Requires at least: 3.1
-Tested up to: 3.5.1
+Requires at least: 3.7.0
+Tested up to: 3.7.1
 Stable tag: /trunk
 License: CC BY-NC 3.0
 License URI: http://creativecommons.org/licenses/by-nc/3.0/
@@ -32,6 +32,15 @@ http://ecolosites.eelv.fr/files/2012/10/widgets.png
 http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
+
+= 1.4.0 =
+* Warning ! due to widget ID changing, widgets will be removed from sidebar and will need to be re-introduced
+* Add: Use new wp_get_sites() function
+* Fix: Large performances optimisaton
+* Fix: PHP warning
+
+= 1.3.4 =
+* Fix: Remove PHP Warning for missing parameter
 
 = 1.3.3 =
 * Fix: Bug fix

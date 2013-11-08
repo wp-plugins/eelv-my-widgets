@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.3.3
+Version: 1.4.0
 Author: bastho, EELV
 License: CC
 */
@@ -38,8 +38,7 @@ function eelvmkpg(){
 	  
 	  
 	  // select all blogs
-	   $sql = 'SELECT `blog_id` FROM `'.$wpdb->blogs.'` WHERE `public`=1 AND `archived`=\'0\' AND `mature`=0 AND `spam`=0 AND  `deleted`=0 ORDER BY `domain`';
-	   $blogs_list = $wpdb->get_col($wpdb->prepare($sql));
+	  $blogs_list = wp_get_sites();
 	  // Construct the query on all blogs 
 	  
 	  $date_limit='';
@@ -47,15 +46,16 @@ function eelvmkpg(){
 			$date_limit=' AND `post_modified`>=\''.date('Y-m-d H:i:s',strtotime('-'.$eelv_widgets_admin_days.'days')).'\'';  
 	  }
 	  $req='';
-	  foreach ($blogs_list as $blog):
+	  foreach ($blogs_list as $blogue):
+		  $blog=$blogue['blog_id'];
 		  $chem = $wpdb->base_prefix.$blog.'_posts';
 		  if($blog==1) $chem = $wpdb->base_prefix.'posts';
-			$req.='(SELECT `post_author`, `post_modified`, `post_content`,`post_name`,`guid`,`post_title` FROM `'.$chem.'` WHERE `post_status`=\'publish\' AND `post_type`=\'eelv_widget\' '.$date_limit.') UNION ';	 
+			$req.='(SELECT `ID`,`post_title`,\'_'.$blog.'\' FROM `'.$chem.'` WHERE `post_status`=\'publish\' AND `post_type`=\'eelv_widget\' '.$date_limit.') UNION ';	 
 	  endforeach;  
 	  $req=substr($req,0,-7).' ORDER BY `post_title`'; 
 	  
 	   // Parse all widgets
-	  $widget_list = $wpdb->get_results($req);	  
+	  $widget_list = $wpdb->get_results($req);	
 	  
 	  // Save cache if needed
 	  if($eelv_widgets_admin_cache>0){
@@ -68,7 +68,8 @@ function eelvmkpg(){
 	  $widget_list = get_site_option( 'eelv_widgets_cache_value');
   }
 
- foreach($widget_list as $widget):  
+ foreach($widget_list as $widget): 
+	 $widget=eelv_widget_get($widget); 
  	 $widget->uid = str_replace(
 		 array('http://',DOMAIN_CURRENT_SITE,'/','.','?','&','p=','=','post_type','eelv_widget','-','"','\''),
 		 array('','','_','_','','','','','','','_','',''),
@@ -76,20 +77,40 @@ function eelvmkpg(){
 	 );	 
 	 if(substr($widget->uid,0,1)=='_') $widget->uid=str_replace('.','_',DOMAIN_CURRENT_SITE).$widget->uid;
 	 $widget->uid=trim(str_replace('__','_',$widget->uid));
-	 	$construct='wp_register_sidebar_widget( "eelv_wdg'.$widget->uid.'","# '.ucfirst(str_replace('"','\"',($widget->post_title))).'", "ee_wg'. $widget->uid.'_f",array("description" => "'.substr($widget->uid,0,strrpos($widget->uid,'_')).' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified)).' "));
-		function ee_wg'.$widget->uid.'_f($p){
-            echo $p[\'before_widget\'];
-            echo $p[\'before_title\'];
-            echo "'.str_replace('"','\"',$widget->post_title).'";
-            echo $p[\'after_title\'];
-            echo\'<div class="wigeelv">\'; 
-            echo "'.str_replace('"','\"',$widget->post_content).'<div class=\"clear\"></div>";
-            echo\'</div>\';
-            echo $p[\'after_widget\'];
-          }';
-		 eval($construct);
+	 	wp_register_sidebar_widget( 
+	 		'eelv_wdg_'.$widget->blog_id.'_'.$widget->ID,
+	 		'# '.ucfirst($widget->post_title), 
+	 		'eelv_widget_callback',
+	 		array(
+	 			"description" => substr($widget->uid,0,strrpos($widget->uid,'_')).' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified))
+			)
+	 	);
+		 
   endforeach;
  
+}
+
+function eelv_widget_get($widget){
+	$widget = (array) $widget;
+	$vals = array_values($widget);
+	$blog_id = substr($vals[2],1);
+	$widget= get_blog_post($blog_id, $vals[0] );
+	$widget->blog_id=$blog_id;
+	return $widget;
+}
+function eelv_widget_callback($p){
+	$p_w = explode('_',$p['widget_id']);
+	$widget=get_blog_post($p_w[2], $p_w[3] );
+	echo $p['before_widget'];
+	if(!empty($widget->post_title)){
+	    echo $p['before_title'];
+	    echo $widget->post_title;
+	    echo $p['after_title'];
+	}
+    echo'<div class="wigeelv">'; 
+    echo $widget->post_content;
+    echo'</div>';
+    echo $p['after_widget'];
 }
 
 
@@ -110,6 +131,7 @@ function eelv_widgets_side_info_function(){
    _e("Your widget will be displayed for everyone since you move it into trash",'eelv_widgets');  
   }
   else{
+   echo'<h4>'.__('Published, this widget will be visible for every user on this platform','eelv_widgets').'</h4>';
    printf(__("Your widget will be hidden after %s. If you want to keep it alive, then, you'll have to edit it again",'eelv_widgets'),date_i18n(get_option('date_format') ,strtotime('+'.$eelv_widgets_admin_days.'days')));  
   }
 }
@@ -123,7 +145,7 @@ function eelv_widgets_save_postdata( $post_id ) {
     return;
   
   //force cache refreshing
-  update_site_option( 'eelv_widgets_admin_cache_time');
+  update_site_option( 'eelv_widgets_admin_cache_time','');
   
   //alert the administrator
   
@@ -216,6 +238,10 @@ function eelv_widgets_network_configuration(){
     
 <?php
 }
+
+
+
+
 
 add_action( 'network_admin_menu', 'eelv_widgets_ajout_network_menu');
 add_action( 'save_post', 'eelv_widgets_save_postdata' );

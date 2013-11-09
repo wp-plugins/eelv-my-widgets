@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.4.0
+Version: 1.4.1
 Author: bastho, EELV
 License: CC
 */
@@ -70,6 +70,7 @@ function eelvmkpg(){
 
  foreach($widget_list as $widget): 
 	 $widget=eelv_widget_get($widget); 
+	 
  	 $widget->uid = str_replace(
 		 array('http://',DOMAIN_CURRENT_SITE,'/','.','?','&','p=','=','post_type','eelv_widget','-','"','\''),
 		 array('','','_','_','','','','','','','_','',''),
@@ -77,12 +78,15 @@ function eelvmkpg(){
 	 );	 
 	 if(substr($widget->uid,0,1)=='_') $widget->uid=str_replace('.','_',DOMAIN_CURRENT_SITE).$widget->uid;
 	 $widget->uid=trim(str_replace('__','_',$widget->uid));
+	 $sitename = substr($widget->uid,0,strrpos($widget->uid,'_'));
+	 $author = get_user_by('id',$widget->post_author);
+	 	eval('function eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID.'($p){eelv_widget_callback($p);}');
 	 	wp_register_sidebar_widget( 
 	 		'eelv_wdg_'.$widget->blog_id.'_'.$widget->ID,
-	 		'# '.ucfirst($widget->post_title), 
-	 		'eelv_widget_callback',
+	 		'# '.(!empty($widget->post_title)?ucfirst($widget->post_title):$sitename.' '.$widget->ID), 
+	 		'eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID,
 	 		array(
-	 			"description" => substr($widget->uid,0,strrpos($widget->uid,'_')).' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified))
+	 			"description" => $sitename.' '.__('by:','eelv_widgets').' '.$author->display_name.' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified))
 			)
 	 	);
 		 

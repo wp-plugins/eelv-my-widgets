@@ -33,6 +33,10 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+= 1.4.1 =
+* Add : Author name in widgets list
+* Fix : Multi-widgets bug
+
 = 1.4.0 =
 * Warning ! due to widget ID changing, widgets will be removed from sidebar and will need to be re-introduced
 * Add: Use new wp_get_sites() function

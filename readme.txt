@@ -33,6 +33,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+= 1.4.2 =
+* Fix : Force refresh when saving a new widget
+
 = 1.4.1 =
 * Add : Author name in widgets list
 * Fix : Multi-widgets bug

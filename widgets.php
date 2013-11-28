@@ -173,7 +173,7 @@ function eelv_widgets_save_postdata( $post_id ) {
   get_currentuserinfo();
   
   $action=__('created','eelv_widgets');
-  if($_POSRT['original_post_status']=='publish'){
+  if($_POST['original_post_status']=='publish'){
 	  $action=__('updated','eelv_widgets');
   }
   

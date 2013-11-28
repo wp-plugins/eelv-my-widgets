@@ -3,7 +3,7 @@
 Plugin Name: EELV My Widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.4.2
+Version: 1.4.3
 Author: bastho, EELV
 License: CC
 */
@@ -32,31 +32,42 @@ function eelvmkpg(){
   $eelv_widgets_admin_cache = abs(get_site_option( 'eelv_widgets_admin_cache'));
   $eelv_widgets_admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache_time'));
   $eelv_widgets_admin_days = abs(get_site_option( 'eelv_widgets_admin_days'));  
-
   if($eelv_widgets_admin_cache == 0 || $eelv_widgets_admin_cache_time==0 || $eelv_widgets_admin_cache_time<time()){	   
 	  global $wpdb; 
 	  
 	  
 	  // select all blogs
-	  $blogs_list = wp_get_sites();
-	  // Construct the query on all blogs 
-	  
-	  $date_limit='';
-	  if($eelv_widgets_admin_days>0){
-			$date_limit=' AND `post_modified`>=\''.date('Y-m-d H:i:s',strtotime('-'.$eelv_widgets_admin_days.'days')).'\'';  
-	  }
-	  $req='';
-	  foreach ($blogs_list as $blogue):
-		  $blog=$blogue['blog_id'];
-		  $chem = $wpdb->base_prefix.$blog.'_posts';
-		  if($blog==1) $chem = $wpdb->base_prefix.'posts';
-			$req.='(SELECT `ID`,`post_title`,\'_'.$blog.'\' FROM `'.$chem.'` WHERE `post_status`=\'publish\' AND `post_type`=\'eelv_widget\' '.$date_limit.') UNION ';	 
-	  endforeach;  
-	  $req=substr($req,0,-7).' ORDER BY `post_title`'; 
-	  
+	  $offset=0;
+	  $limit=100;
+	  $count = get_site_option( 'blog_count' );
+	  $widget_list = array();
+	   
 	   // Parse all widgets
-	  $widget_list = $wpdb->get_results($req);	
+	  for($s=0 ; $s<$count ; $s+=$limit){
+		  $blogs_list = wp_get_sites(array('limit'=>$limit,'offset'=>$offset));
+		  
+		  // Construct the query on all blogs, splitted by 100 to prevent SQL to go away
+		  $date_limit='';
+		  if($eelv_widgets_admin_days>0){
+				$date_limit=' AND `post_modified`>=\''.date('Y-m-d H:i:s',strtotime('-'.$eelv_widgets_admin_days.'days')).'\'';  
+		  }
+		  $req='';
+		  foreach ($blogs_list as $blogue):
+			  $blog=$blogue['blog_id'];
+			  $chem = $wpdb->base_prefix.$blog.'_posts';
+			  if($blog==1) $chem = $wpdb->base_prefix.'posts';
+				$req.='(SELECT `ID`,`post_title`,\'_'.$blog.'\' FROM `'.$chem.'` WHERE `post_status`=\'publish\' AND `post_type`=\'eelv_widget\' '.$date_limit.') UNION ';	 
+		  endforeach;  
+		  $req=substr($req,0,-7).' ORDER BY `post_title`';
+		  $widgets = $wpdb->get_results($req);
+		  foreach ($widgets as $wdg) {
+			  $widget_list['_'.$blog.'_'.$wdg->ID]=$wdg;
+		  }
+		  $offset=$s;
+	  }
 	  
+	   
+	 
 	  // Save cache if needed
 	  if($eelv_widgets_admin_cache>0){
 		   $eelv_widgets_admin_cache_time = strtotime('+'.$eelv_widgets_admin_cache.'minutes');
@@ -80,7 +91,9 @@ function eelvmkpg(){
 	 $widget->uid=trim(str_replace('__','_',$widget->uid));
 	 $sitename = substr($widget->uid,0,strrpos($widget->uid,'_'));
 	 $author = get_user_by('id',$widget->post_author);
+	 	if(!function_exists('function eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID)){
 	 	eval('function eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID.'($p){eelv_widget_callback($p);}');
+	 	}
 	 	wp_register_sidebar_widget( 
 	 		'eelv_wdg_'.$widget->blog_id.'_'.$widget->ID,
 	 		'# '.(!empty($widget->post_title)?ucfirst($widget->post_title):$sitename.' '.$widget->ID), 

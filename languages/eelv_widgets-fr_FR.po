@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eelv_widgets\n"
-"POT-Creation-Date: 2013-11-09 10:55+0100\n"
-"PO-Revision-Date: 2013-11-09 10:56+0100\n"
+"POT-Creation-Date: 2013-12-12 09:37+0100\n"
+"PO-Revision-Date: 2013-12-12 09:37+0100\n"
 "Last-Translator: Bastien Ho <bastienho@urbancube.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,79 +14,83 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../widgets.php:17
-msgid "Personalized widgets"
-msgstr "Widgets personnalis&eacute;s"
-
-#: ../widgets.php:18
-msgid "Personalized widget"
-msgstr "Widget personnalis&eacute;"
-
-#: ../widgets.php:19
+#: ../widgets.php:18 ../widgets.php:25
 msgid "My widgets"
 msgstr "Mes widgets"
 
-#: ../widgets.php:20
+#: ../widgets.php:19
+msgid "create and share your text widgets in a multisites plateform"
+msgstr "Créez et partagez vos widgets texte dans une plateforme multisite"
+
+#: ../widgets.php:23
+msgid "Personalized widgets"
+msgstr "Widgets personnalis&eacute;s"
+
+#: ../widgets.php:24
+msgid "Personalized widget"
+msgstr "Widget personnalis&eacute;"
+
+#: ../widgets.php:26
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../widgets.php:21
+#: ../widgets.php:27
 msgid "Add a widget"
 msgstr "Ajouter un widget"
 
-#: ../widgets.php:22
+#: ../widgets.php:28
 msgid "Edit"
 msgstr "Editer"
 
-#: ../widgets.php:24
+#: ../widgets.php:30
 msgid "New widget"
 msgstr "Nouveau widget"
 
-#: ../widgets.php:25
+#: ../widgets.php:31
 msgid "View"
 msgstr "Voir"
 
-#: ../widgets.php:26
+#: ../widgets.php:32
 msgid "View widget"
 msgstr "Voir le widget"
 
-#: ../widgets.php:27
+#: ../widgets.php:33
 msgid "Search Widgets"
 msgstr "Rechercher dans les widgets"
 
-#: ../widgets.php:28
+#: ../widgets.php:34
 msgid "No Widget Found"
 msgstr "Aucun widget trouv&eacute;"
 
-#: ../widgets.php:29
+#: ../widgets.php:35
 msgid "No Widget Found in Trash"
 msgstr "Aucun widget trouv&eacute; dans la corbeille"
 
-#: ../widgets.php:30
+#: ../widgets.php:36
 msgid "Parent Widget"
 msgstr "Widget parent"
 
-#: ../widgets.php:89
+#: ../widgets.php:117
 msgid "by:"
 msgstr "par :"
 
-#: ../widgets.php:126
+#: ../widgets.php:158
 msgid "Visibility"
 msgstr "Visibilit&eacute;"
 
-#: ../widgets.php:135
+#: ../widgets.php:167
 msgid "Your widget will be displayed for everyone since you move it into trash"
 msgstr ""
 "Votre widget sera disponible pour tout le monde jusqu'&agrave; ce que vous "
 "le d&eacute;placiez &agrave; la corbeille"
 
-#: ../widgets.php:138
+#: ../widgets.php:170
 msgid "Published, this widget will be visible for every user on this platform"
 msgstr ""
 "Publié, ce widget sera visible pour tou-te-s les utilisat-eur/rice-s sur "
 "cette plateforme"
 
-#: ../widgets.php:139
+#: ../widgets.php:171
 #, php-format
 msgid ""
 "Your widget will be hidden after %s. If you want to keep it alive, then, "
@@ -95,65 +99,65 @@ msgstr ""
 "Votre widget sera masqu&eacute; apr&egrave;s le %s. Si vous souhaitez le "
 "conserver, il vous faudra le r&eacute;&eacute;diter"
 
-#: ../widgets.php:162
+#: ../widgets.php:194
 msgid "created"
 msgstr "cr&eacute;&eacute;"
 
-#: ../widgets.php:164
+#: ../widgets.php:196
 msgid "updated"
 msgstr "mis &agrave; jour"
 
-#: ../widgets.php:167
+#: ../widgets.php:199
 msgid "New widget created and shared"
 msgstr "Nouveau Widget cr&eacute;&eacute; et partag&eacute;"
 
-#: ../widgets.php:167
+#: ../widgets.php:199
 msgid "A new widget \"%$1$s\" has been %$2$s and shared : %$3$s"
 msgstr ""
 "Un nouveau widget \"%$1$s\" a &eacute;t&eacute; %$2$s et partag&eacute; : %"
 "$3$s"
 
-#: ../widgets.php:172 ../widgets.php:191
+#: ../widgets.php:204 ../widgets.php:223
 msgid "Their widgets"
 msgstr "Leurs widgets"
 
-#: ../widgets.php:182
+#: ../widgets.php:214
 msgid "Options saved"
 msgstr "Option sauvegard&eacute;e"
 
-#: ../widgets.php:200
+#: ../widgets.php:232
 msgid "Configuration "
 msgstr "Configuration"
 
-#: ../widgets.php:206
+#: ../widgets.php:238
 msgid "Send an alert for each creation :"
 msgstr "Envoyer une alerte pour chaque cr&eacute;ation :"
 
-#: ../widgets.php:214
+#: ../widgets.php:246
 msgid "Keep widgets in cache :"
 msgstr "Garder les widgets en cache :"
 
-#: ../widgets.php:216
+#: ../widgets.php:248
 msgid "minute(s)"
 msgstr "minute(s)"
 
-#: ../widgets.php:217
+#: ../widgets.php:249
 msgid "value 0 is no-cache"
 msgstr "la valeur 0 d&eacute;sactive le cache"
 
-#: ../widgets.php:223
+#: ../widgets.php:255
 msgid "Hide widgets older than :"
 msgstr "Masquer les widget plus vieux que :"
 
-#: ../widgets.php:225
+#: ../widgets.php:257
 msgid "day(s)"
 msgstr "jour(s)"
 
-#: ../widgets.php:226
+#: ../widgets.php:258
 msgid "value 0 disables option"
 msgstr "la valeur 0 d&eacutesactive l'option"
 
-#: ../widgets.php:233
+#: ../widgets.php:265
 msgid "save"
 msgstr "sauvegarder"
 

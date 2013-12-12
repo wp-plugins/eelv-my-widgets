@@ -1,12 +1,11 @@
-=== EELV My Widgets ===
+=== My widgets ===
 Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
 Requires at least: 3.7.0
-Tested up to: 3.7.1
+Tested up to: 3.8
 Stable tag: /trunk
-License: CC BY-NC 3.0
-License URI: http://creativecommons.org/licenses/by-nc/3.0/
+License: GPLv2
 
 create and share your text widgets in a multisites plateform
 
@@ -32,6 +31,11 @@ http://ecolosites.eelv.fr/files/2012/10/widgets.png
 http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
+
+= 1.4.4 =
+* Fix : change name to "My widgets"
+* Fix : lighter SQL queries
+* Licence : Change licence to GPLv2
 
 = 1.4.3 =
 * Fix : More than 100 sites plateform bug

@@ -1,17 +1,24 @@
 <?php
 /*
-Plugin Name: EELV My Widgets 
+Plugin Name: My widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.4.3
+Version: 1.4.4
 Author: bastho, EELV
-License: CC
+License: GPLv2
+Text Domain: eelv_widgets
+Domain Path: /languages/
+Network : 1
 */
 
 add_action( 'init', 'eelvmkpg' );
+
+
 function eelvmkpg(){
 	load_plugin_textdomain( 'eelv_widgets', false, 'eelv-my-widgets/languages' );
-	
+	__('My widgets','eelv_widgets');
+	__('create and share your text widgets in a multisites plateform','eelv_widgets');
+	global $wpdb; 
 	// Add the post_type for all blogs
   register_post_type('eelv_widget', array(  'label' => 'Widgets','description' => 'creez et publiez vos propres widgets','public' => true,'show_ui' => true,'show_in_menu' => 'themes.php','capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => false,'supports' => array('title','editor','author',),'labels' => array (
     'name' => __('Personalized widgets', 'eelv_widgets' ),
@@ -33,7 +40,7 @@ function eelvmkpg(){
   $eelv_widgets_admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache_time'));
   $eelv_widgets_admin_days = abs(get_site_option( 'eelv_widgets_admin_days'));  
   if($eelv_widgets_admin_cache == 0 || $eelv_widgets_admin_cache_time==0 || $eelv_widgets_admin_cache_time<time()){	   
-	  global $wpdb; 
+	  
 	  
 	  
 	  // select all blogs
@@ -78,7 +85,7 @@ function eelvmkpg(){
   else{
 	  $widget_list = get_site_option( 'eelv_widgets_cache_value');
   }
-
+  $users_cach=array();
  foreach($widget_list as $widget): 
 	 $widget=eelv_widget_get($widget); 
 	 
@@ -90,7 +97,16 @@ function eelvmkpg(){
 	 if(substr($widget->uid,0,1)=='_') $widget->uid=str_replace('.','_',DOMAIN_CURRENT_SITE).$widget->uid;
 	 $widget->uid=trim(str_replace('__','_',$widget->uid));
 	 $sitename = substr($widget->uid,0,strrpos($widget->uid,'_'));
-	 $author = get_user_by('id',$widget->post_author);
+	 
+	 if(isset($users_cach[$widget->post_author])){
+	 	$author = $users_cach[$widget->post_author];
+	 }
+	 else{
+	 	$a_req = 'SELECT `user_nicename` FROM wp_users WHERE ID = '.$widget->post_author;
+		$author = $wpdb->get_results($a_req);
+		$author = $author[0]->user_nicename;
+	 }
+	 
 	 	if(!function_exists('function eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID)){
 	 	eval('function eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID.'($p){eelv_widget_callback($p);}');
 	 	}
@@ -99,7 +115,7 @@ function eelvmkpg(){
 	 		'# '.(!empty($widget->post_title)?ucfirst($widget->post_title):$sitename.' '.$widget->ID), 
 	 		'eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID,
 	 		array(
-	 			"description" => $sitename.' '.__('by:','eelv_widgets').' '.$author->display_name.' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified))
+	 			"description" => $sitename.' '.__('by:','eelv_widgets').' '.$author.' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified))
 			)
 	 	);
 		 
@@ -111,9 +127,13 @@ function eelv_widget_get($widget){
 	$widget = (array) $widget;
 	$vals = array_values($widget);
 	$blog_id = substr($vals[2],1);
-	$widget= get_blog_post($blog_id, $vals[0] );
-	$widget->blog_id=$blog_id;
-	return $widget;
+	global $wpdb;
+	$chem = $wpdb->base_prefix.$blog_id.'_posts';
+	if($blog_id==1) $chem = $wpdb->base_prefix.'posts';
+	$req='SELECT `ID`,`post_title`,`post_author`,`post_modified`,`guid` FROM '.$chem.' WHERE ID = '.$vals[0].' LIMIT 1';
+	$widget= $wpdb->get_results($req);
+	$widget[0]->blog_id=$blog_id;
+	return $widget[0];
 }
 function eelv_widget_callback($p){
 	$p_w = explode('_',$p['widget_id']);

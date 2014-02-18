@@ -1,0 +1,14 @@
+.eelv_widgets_on{
+    color:#090;
+}
+.eelv_widgets_off{
+    color:#900;
+}
+.eelv_widgets_on .dashicons:before, .eelv_widgets_off .dashicons:before{
+    content:'';
+}
+.eelv_widget_uptime{
+    display:block;
+}
+
+

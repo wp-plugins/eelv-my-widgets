@@ -1,9 +1,9 @@
-=== My widgets ===
+=== My shared widgets ===
 Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
 Requires at least: 3.7.0
-Tested up to: 3.8
+Tested up to: 3.8.1
 Stable tag: /trunk
 License: GPLv2
 
@@ -31,6 +31,13 @@ http://ecolosites.eelv.fr/files/2012/10/widgets.png
 http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
+
+= 1.5.0 =
+* Change : "My shared widgets" more efficient than "My Widgets"
+* Add : Column to display share status for each widget
+* Add : Extend button
+* Change : Loud changes in code structure
+* Fix : some bugs
 
 = 1.4.4 =
 * Fix : change name to "My widgets"

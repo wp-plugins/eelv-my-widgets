@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eelv_widgets\n"
-"POT-Creation-Date: 2013-12-12 09:37+0100\n"
-"PO-Revision-Date: 2013-12-12 09:37+0100\n"
+"POT-Creation-Date: 2014-02-18 11:56+0100\n"
+"PO-Revision-Date: 2014-02-18 11:56+0100\n"
 "Last-Translator: Bastien Ho <bastienho@urbancube.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,151 +13,163 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
 
-#: ../widgets.php:18 ../widgets.php:25
+#: ../widgets.php:43
 msgid "My widgets"
 msgstr "Mes widgets"
 
-#: ../widgets.php:19
+#: ../widgets.php:44
 msgid "create and share your text widgets in a multisites plateform"
 msgstr "Créez et partagez vos widgets texte dans une plateforme multisite"
 
-#: ../widgets.php:23
-msgid "Personalized widgets"
-msgstr "Widgets personnalis&eacute;s"
+#: ../widgets.php:48 ../widgets.php:50
+msgid "My shared widgets"
+msgstr "Mes widgets partagés"
 
-#: ../widgets.php:24
-msgid "Personalized widget"
-msgstr "Widget personnalis&eacute;"
+#: ../widgets.php:49
+msgid "One of my shared widgets"
+msgstr "Un de mes widgets partagés"
 
-#: ../widgets.php:26
-msgid "Add"
-msgstr "Ajouter"
+#: ../widgets.php:51
+msgid "Share a new widget"
+msgstr "Partager un nouveau widget"
 
-#: ../widgets.php:27
+#: ../widgets.php:52
 msgid "Add a widget"
 msgstr "Ajouter un widget"
 
-#: ../widgets.php:28
+#: ../widgets.php:53
 msgid "Edit"
 msgstr "Editer"
 
-#: ../widgets.php:30
+#: ../widgets.php:54
+msgid "Edit shared widget"
+msgstr "Editer le widget partagé"
+
+#: ../widgets.php:55
 msgid "New widget"
 msgstr "Nouveau widget"
 
-#: ../widgets.php:31
+#: ../widgets.php:56
 msgid "View"
 msgstr "Voir"
 
-#: ../widgets.php:32
+#: ../widgets.php:57
 msgid "View widget"
 msgstr "Voir le widget"
 
-#: ../widgets.php:33
+#: ../widgets.php:58
 msgid "Search Widgets"
 msgstr "Rechercher dans les widgets"
 
-#: ../widgets.php:34
+#: ../widgets.php:59
 msgid "No Widget Found"
 msgstr "Aucun widget trouv&eacute;"
 
-#: ../widgets.php:35
+#: ../widgets.php:60
 msgid "No Widget Found in Trash"
 msgstr "Aucun widget trouv&eacute; dans la corbeille"
 
-#: ../widgets.php:36
+#: ../widgets.php:61
 msgid "Parent Widget"
 msgstr "Widget parent"
 
-#: ../widgets.php:117
+#: ../widgets.php:141
 msgid "by:"
 msgstr "par :"
 
-#: ../widgets.php:158
-msgid "Visibility"
-msgstr "Visibilit&eacute;"
-
-#: ../widgets.php:167
+#: ../widgets.php:150
 msgid "Your widget will be displayed for everyone since you move it into trash"
 msgstr ""
 "Votre widget sera disponible pour tout le monde jusqu'&agrave; ce que vous "
 "le d&eacute;placiez &agrave; la corbeille"
 
-#: ../widgets.php:170
-msgid "Published, this widget will be visible for every user on this platform"
-msgstr ""
-"Publié, ce widget sera visible pour tou-te-s les utilisat-eur/rice-s sur "
-"cette plateforme"
+#: ../widgets.php:158
+#, php-format
+msgid "Shared until %s"
+msgstr "Partagé jusqu'au %s"
+
+#: ../widgets.php:161
+#, php-format
+msgid "Hidden since %s"
+msgstr "Caché depuis le %s"
+
+#: ../widgets.php:163
+msgid "Extend"
+msgstr "Prolonger"
 
 #: ../widgets.php:171
-#, php-format
-msgid ""
-"Your widget will be hidden after %s. If you want to keep it alive, then, "
-"you'll have to edit it again"
-msgstr ""
-"Votre widget sera masqu&eacute; apr&egrave;s le %s. Si vous souhaitez le "
-"conserver, il vous faudra le r&eacute;&eacute;diter"
+msgid "Visibility"
+msgstr "Visibilit&eacute;"
 
-#: ../widgets.php:194
+#: ../widgets.php:188
+msgid "Bad parameters"
+msgstr "Mauvais paramètres"
+
+#: ../widgets.php:212
 msgid "created"
 msgstr "cr&eacute;&eacute;"
 
-#: ../widgets.php:196
+#: ../widgets.php:214
 msgid "updated"
 msgstr "mis &agrave; jour"
 
-#: ../widgets.php:199
+#: ../widgets.php:217
 msgid "New widget created and shared"
 msgstr "Nouveau Widget cr&eacute;&eacute; et partag&eacute;"
 
-#: ../widgets.php:199
+#: ../widgets.php:217
 msgid "A new widget \"%$1$s\" has been %$2$s and shared : %$3$s"
 msgstr ""
 "Un nouveau widget \"%$1$s\" a &eacute;t&eacute; %$2$s et partag&eacute; : %"
 "$3$s"
 
-#: ../widgets.php:204 ../widgets.php:223
+#: ../widgets.php:223
+msgid "Share status"
+msgstr "Statut de partage"
+
+#: ../widgets.php:246 ../widgets.php:267
 msgid "Their widgets"
 msgstr "Leurs widgets"
 
-#: ../widgets.php:214
+#: ../widgets.php:258
 msgid "Options saved"
 msgstr "Option sauvegard&eacute;e"
 
-#: ../widgets.php:232
+#: ../widgets.php:276
 msgid "Configuration "
 msgstr "Configuration"
 
-#: ../widgets.php:238
+#: ../widgets.php:282
 msgid "Send an alert for each creation :"
 msgstr "Envoyer une alerte pour chaque cr&eacute;ation :"
 
-#: ../widgets.php:246
+#: ../widgets.php:290
 msgid "Keep widgets in cache :"
 msgstr "Garder les widgets en cache :"
 
-#: ../widgets.php:248
+#: ../widgets.php:292
 msgid "minute(s)"
 msgstr "minute(s)"
 
-#: ../widgets.php:249
+#: ../widgets.php:293
 msgid "value 0 is no-cache"
 msgstr "la valeur 0 d&eacute;sactive le cache"
 
-#: ../widgets.php:255
+#: ../widgets.php:299
 msgid "Hide widgets older than :"
 msgstr "Masquer les widget plus vieux que :"
 
-#: ../widgets.php:257
+#: ../widgets.php:301
 msgid "day(s)"
 msgstr "jour(s)"
 
-#: ../widgets.php:258
+#: ../widgets.php:302
 msgid "value 0 disables option"
 msgstr "la valeur 0 d&eacutesactive l'option"
 
-#: ../widgets.php:265
+#: ../widgets.php:309
 msgid "save"
 msgstr "sauvegarder"
 
@@ -170,3 +182,25 @@ msgid "These widgets are shared by other users from your sites platform"
 msgstr ""
 "Ces widgets sont partagés par les utilisat-eur/rice-s des sites de cette "
 "plateforme"
+
+#~ msgid ""
+#~ "Published, this widget will be visible for every user on this platform"
+#~ msgstr ""
+#~ "Publié, ce widget sera visible pour tou-te-s les utilisat-eur/rice-s sur "
+#~ "cette plateforme"
+
+#~ msgid ""
+#~ "Your widget will be hidden after %s. If you want to keep it alive, then, "
+#~ "you'll have to edit it again"
+#~ msgstr ""
+#~ "Votre widget sera masqu&eacute; apr&egrave;s le %s. Si vous souhaitez le "
+#~ "conserver, il vous faudra le r&eacute;&eacute;diter"
+
+#~ msgid "Personalized widgets"
+#~ msgstr "Widgets personnalis&eacute;s"
+
+#~ msgid "Personalized widget"
+#~ msgstr "Widget personnalis&eacute;"
+
+#~ msgid "Add"
+#~ msgstr "Ajouter"

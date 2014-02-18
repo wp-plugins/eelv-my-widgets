@@ -3,7 +3,7 @@
 Plugin Name: My shared widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.5.0
+Version: 1.5.1
 Author: bastho, EELV
 License: GPLv2
 Text Domain: eelv_widgets
@@ -12,7 +12,6 @@ Network : 1
 */
 
 
-$SharedWidgets=new SharedWidgets();
 class SharedWidgets{
 	public $admin_days;  
 	public $admin_cache;
@@ -39,14 +38,12 @@ class SharedWidgets{
 		$this->admin_cache = abs(get_site_option( 'eelv_widgets_admin_cache'));
 	  	$this->admin_cache_time = abs(get_site_option( 'eelv_widgets_admin_cache_time')); 
 	 
-		
-		__('My widgets','eelv_widgets');
-		__('create and share your text widgets in a multisites plateform','eelv_widgets');
+	
 		global $wpdb; 
 		// Add the post_type for all blogs
 	  register_post_type('eelv_widget', 
-	  		array(  'label' => 'Widgets',
-	  		'description' => 'creez et publiez vos propres widgets',
+	  		array(  'label' => __('My shared widgets','eelv_widgets'),
+	  		'description' => __('create and share your text widgets in a multisites plateform','eelv_widgets'),
 	  		'public' => true,
 	  		'show_ui' => true,
 	  		'show_in_menu' => 'themes.php',
@@ -332,6 +329,7 @@ class SharedWidgets{
 	}
 }
 
+$eelv_SharedWidgets=new SharedWidgets();
 
 
 

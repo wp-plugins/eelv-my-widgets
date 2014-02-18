@@ -32,6 +32,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+= 1.5.1 =
+* Fix : bug fix
+
 = 1.5.0 =
 * Change : "My shared widgets" more efficient than "My Widgets"
 * Add : Column to display share status for each widget

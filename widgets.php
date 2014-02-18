@@ -252,7 +252,7 @@ class SharedWidgets{
 	
 	// Ajout du menu d'option sur le reseau
 	function network_menu() {
-	  add_submenu_page('settings.php', __('Their widgets', 'eelv_widgets' ), __('Their widgets', 'eelv_widgets' ), 'Super Admin', array(&$this,'network_configuration'), 'eelv_widgets_network_configuration');   
+	  add_submenu_page('settings.php', __('Their widgets', 'eelv_widgets' ), __('Their widgets', 'eelv_widgets' ), 'Super Admin', 'eelv_widgets_network_configuration', array(&$this,'network_configuration'));   
 	}
 	
 	

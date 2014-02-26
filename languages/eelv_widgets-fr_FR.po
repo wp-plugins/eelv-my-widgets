@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eelv_widgets\n"
-"POT-Creation-Date: 2014-02-18 11:56+0100\n"
-"PO-Revision-Date: 2014-02-18 11:56+0100\n"
+"POT-Creation-Date: 2014-02-26 16:12+0100\n"
+"PO-Revision-Date: 2014-02-26 16:12+0100\n"
 "Last-Translator: Bastien Ho <bastienho@urbancube.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,163 +15,175 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPath-1: .\n"
 
-#: ../widgets.php:43
-msgid "My widgets"
-msgstr "Mes widgets"
-
-#: ../widgets.php:44
-msgid "create and share your text widgets in a multisites plateform"
-msgstr "Créez et partagez vos widgets texte dans une plateforme multisite"
-
-#: ../widgets.php:48 ../widgets.php:50
+#: ../widgets.php:49 ../widgets.php:60 ../widgets.php:62
 msgid "My shared widgets"
 msgstr "Mes widgets partagés"
 
-#: ../widgets.php:49
+#: ../widgets.php:50
+msgid "create and share your text widgets in a multisites plateform"
+msgstr "Créez et partagez vos widgets texte dans une plateforme multisite"
+
+#: ../widgets.php:61
 msgid "One of my shared widgets"
 msgstr "Un de mes widgets partagés"
 
-#: ../widgets.php:51
+#: ../widgets.php:63
 msgid "Share a new widget"
 msgstr "Partager un nouveau widget"
 
-#: ../widgets.php:52
+#: ../widgets.php:64
 msgid "Add a widget"
 msgstr "Ajouter un widget"
 
-#: ../widgets.php:53
+#: ../widgets.php:65
 msgid "Edit"
 msgstr "Editer"
 
-#: ../widgets.php:54
+#: ../widgets.php:66
 msgid "Edit shared widget"
 msgstr "Editer le widget partagé"
 
-#: ../widgets.php:55
+#: ../widgets.php:67
 msgid "New widget"
 msgstr "Nouveau widget"
 
-#: ../widgets.php:56
+#: ../widgets.php:68
 msgid "View"
 msgstr "Voir"
 
-#: ../widgets.php:57
+#: ../widgets.php:69
 msgid "View widget"
 msgstr "Voir le widget"
 
-#: ../widgets.php:58
+#: ../widgets.php:70
 msgid "Search Widgets"
 msgstr "Rechercher dans les widgets"
 
-#: ../widgets.php:59
+#: ../widgets.php:71
 msgid "No Widget Found"
 msgstr "Aucun widget trouv&eacute;"
 
-#: ../widgets.php:60
+#: ../widgets.php:72
 msgid "No Widget Found in Trash"
 msgstr "Aucun widget trouv&eacute; dans la corbeille"
 
-#: ../widgets.php:61
+#: ../widgets.php:73
 msgid "Parent Widget"
 msgstr "Widget parent"
 
-#: ../widgets.php:141
+#: ../widgets.php:159
 msgid "by:"
 msgstr "par :"
 
-#: ../widgets.php:150
+#: ../widgets.php:162
+msgid "Widget options"
+msgstr "Options du widget"
+
+#: ../widgets.php:171
 msgid "Your widget will be displayed for everyone since you move it into trash"
 msgstr ""
 "Votre widget sera disponible pour tout le monde jusqu'&agrave; ce que vous "
 "le d&eacute;placiez &agrave; la corbeille"
 
-#: ../widgets.php:158
+#: ../widgets.php:179
 #, php-format
 msgid "Shared until %s"
 msgstr "Partagé jusqu'au %s"
 
-#: ../widgets.php:161
+#: ../widgets.php:182
 #, php-format
 msgid "Hidden since %s"
 msgstr "Caché depuis le %s"
 
-#: ../widgets.php:163
+#: ../widgets.php:184
 msgid "Extend"
 msgstr "Prolonger"
 
-#: ../widgets.php:171
+#: ../widgets.php:192
 msgid "Visibility"
 msgstr "Visibilit&eacute;"
 
-#: ../widgets.php:188
+#: ../widgets.php:209
 msgid "Bad parameters"
 msgstr "Mauvais paramètres"
 
-#: ../widgets.php:212
+#: ../widgets.php:233
 msgid "created"
 msgstr "cr&eacute;&eacute;"
 
-#: ../widgets.php:214
+#: ../widgets.php:235
 msgid "updated"
 msgstr "mis &agrave; jour"
 
-#: ../widgets.php:217
+#: ../widgets.php:238
 msgid "New widget created and shared"
 msgstr "Nouveau Widget cr&eacute;&eacute; et partag&eacute;"
 
-#: ../widgets.php:217
+#: ../widgets.php:238
 msgid "A new widget \"%$1$s\" has been %$2$s and shared : %$3$s"
 msgstr ""
 "Un nouveau widget \"%$1$s\" a &eacute;t&eacute; %$2$s et partag&eacute; : %"
 "$3$s"
 
-#: ../widgets.php:223
+#: ../widgets.php:244
 msgid "Share status"
 msgstr "Statut de partage"
 
-#: ../widgets.php:246 ../widgets.php:267
+#: ../widgets.php:267 ../widgets.php:288
 msgid "Their widgets"
 msgstr "Leurs widgets"
 
-#: ../widgets.php:258
+#: ../widgets.php:279 ../widgets.php:384
 msgid "Options saved"
 msgstr "Option sauvegard&eacute;e"
 
-#: ../widgets.php:276
+#: ../widgets.php:297
 msgid "Configuration "
 msgstr "Configuration"
 
-#: ../widgets.php:282
+#: ../widgets.php:303
 msgid "Send an alert for each creation :"
 msgstr "Envoyer une alerte pour chaque cr&eacute;ation :"
 
-#: ../widgets.php:290
+#: ../widgets.php:311
 msgid "Keep widgets in cache :"
 msgstr "Garder les widgets en cache :"
 
-#: ../widgets.php:292
+#: ../widgets.php:313
 msgid "minute(s)"
 msgstr "minute(s)"
 
-#: ../widgets.php:293
+#: ../widgets.php:314
 msgid "value 0 is no-cache"
 msgstr "la valeur 0 d&eacute;sactive le cache"
 
-#: ../widgets.php:299
+#: ../widgets.php:320
 msgid "Hide widgets older than :"
 msgstr "Masquer les widget plus vieux que :"
 
-#: ../widgets.php:301
+#: ../widgets.php:322
 msgid "day(s)"
 msgstr "jour(s)"
 
-#: ../widgets.php:302
+#: ../widgets.php:323
 msgid "value 0 disables option"
 msgstr "la valeur 0 d&eacutesactive l'option"
 
-#: ../widgets.php:309
+#: ../widgets.php:330
 msgid "save"
 msgstr "sauvegarder"
+
+#: ../widgets.php:388
+msgid "Title"
+msgstr "Titre"
+
+#: ../widgets.php:390
+msgid "Show"
+msgstr "Afficher"
+
+#: ../widgets.php:391
+msgid "Hide"
+msgstr "Cacher"
 
 #: ../manage.php:15
 msgid "Shared Widgets"
@@ -182,6 +194,9 @@ msgid "These widgets are shared by other users from your sites platform"
 msgstr ""
 "Ces widgets sont partagés par les utilisat-eur/rice-s des sites de cette "
 "plateforme"
+
+#~ msgid "My widgets"
+#~ msgstr "Mes widgets"
 
 #~ msgid ""
 #~ "Published, this widget will be visible for every user on this platform"

@@ -3,21 +3,26 @@
 Plugin Name: My shared widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.5.1
+Version: 1.6.0
 Author: bastho, EELV
 License: GPLv2
 Text Domain: eelv_widgets
 Domain Path: /languages/
 Network : 1
+Tags: widget, widgets, network, share, EELV
 */
-
+$eelv_widget_options= array();
 
 class SharedWidgets{
 	public $admin_days;  
 	public $admin_cache;
 	public $admin_cache_time;
-	  
-	function SharedWidgets(){	
+	
+	function SharedWidgets(){
+		global $eelv_widget_options;	
+		$eelv_widget_options= get_option('eelv_widget_options');
+		if(!is_array($eelv_widget_options)) $eelv_widget_options=array();
+		
 		add_action( 'init', array(&$this,'init') );	
 		add_action( 'add_meta_boxes', array(&$this,'add_custom_box') );		
 		add_action( 'save_post', array(&$this,'save_postdata') );
@@ -141,7 +146,12 @@ class SharedWidgets{
 		 
 		 	if(!function_exists('eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID)){
 		 	eval('function eelv_widget_callback_'.$widget->blog_id.'_'.$widget->ID.'($p){eelv_widget_callback($p);}');
-		 	}
+			}
+			if(!function_exists('eelv_widget_control_'.$widget->blog_id.'_'.$widget->ID)){
+		 	eval('function eelv_widget_control_'.$widget->blog_id.'_'.$widget->ID.'(){eelv_widget_control('.$widget->blog_id.','.$widget->ID.');}');
+			}
+			
+			
 		 	wp_register_sidebar_widget( 
 		 		'eelv_wdg_'.$widget->blog_id.'_'.$widget->ID,
 		 		'# '.(!empty($widget->post_title)?ucfirst($widget->post_title):$sitename.' '.$widget->ID), 
@@ -150,6 +160,9 @@ class SharedWidgets{
 		 			"description" => $sitename.' '.__('by:','eelv_widgets').' '.$author.' - '.date_i18n(get_option('date_format') ,strtotime($widget->post_modified))
 				)
 		 	);
+		 	wp_register_widget_control('eelv_wdg_'.$widget->blog_id.'_'.$widget->ID, __('Widget options','eelv_widgets'),'eelv_widget_control_'.$widget->blog_id.'_'.$widget->ID);
+			
+			
 			 
 	  endforeach;
 	 
@@ -332,7 +345,12 @@ class SharedWidgets{
 $eelv_SharedWidgets=new SharedWidgets();
 
 
+/*
+ * Following functions are called by self-created widgets functions
+ * 
+ */
 
+//Get all usefull attributes of a shared widget
 function eelv_widget_get($widget){
 	$widget = (array) $widget;
 	$vals = array_values($widget);
@@ -345,11 +363,21 @@ function eelv_widget_get($widget){
 	$widget[0]->blog_id=$blog_id;
 	return $widget[0];
 }
+
+/*
+ * Global callback to display a shared widget
+ * @param $p : eelv_wdg_$blogid_$postid
+ */
+
 function eelv_widget_callback($p){
+	global $eelv_widget_options;
 	$p_w = explode('_',$p['widget_id']);
 	$widget=get_blog_post($p_w[2], $p_w[3] );
+	$widget_id = $p_w[2].'_'.$p_w[3];
+	if(!isset($eelv_widget_options[$widget_id])) $eelv_widget_options[$widget_id]=array('show_title'=>1);
+	
 	echo $p['before_widget'];
-	if(!empty($widget->post_title)){
+	if($eelv_widget_options[$widget_id]['show_title']=='1' && !empty($widget->post_title)){
 	    echo $p['before_title'];
 	    echo $widget->post_title;
 	    echo $p['after_title'];
@@ -360,3 +388,28 @@ function eelv_widget_callback($p){
     echo $p['after_widget'];
 }
 
+/*
+ * Global control callback to manage a shared widget
+ * @param $b : $blogid
+ * @param $p : $postid
+ */
+function eelv_widget_control($b,$p){
+	global $eelv_widget_options;
+   $widget_id = $b.'_'.$p;
+   if( isset($_POST['eelv_widget_options']) ){
+   	$eelv_widget_options[$widget_id]=$_POST['eelv_widget_options'];
+	update_option('eelv_widget_options', $eelv_widget_options);
+    _e('Options saved', 'eelv_widgets' );
+   }
+   if(!isset($eelv_widget_options[$widget_id])) $eelv_widget_options[$widget_id]=array('show_title'=>1);
+ ?>
+  <p><label><?php _e('Title', 'eelv_widgets' ) ?>
+    <select name='eelv_widget_options[show_title]'>
+    	<option value="1" <?=($eelv_widget_options[$widget_id]['show_title']=='1'?'selected':'')?>><?php _e('Show','eelv_widgets')?></option>
+    	<option value="0" <?=($eelv_widget_options[$widget_id]['show_title']=='0'?'selected':'')?>><?php _e('Hide','eelv_widgets')?></option>
+    </select> 
+    </label>
+  </p>
+  
+  <?php
+}

@@ -6,6 +6,8 @@ Requires at least: 3.7.0
 Tested up to: 3.8.1
 Stable tag: /trunk
 License: GPLv2
+Network : 1
+Tags: widget, widgets, network, share, EELV
 
 create and share your text widgets in a multisites plateform
 
@@ -31,6 +33,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets.png
 http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
+
+= 1.6.0 =
+* Add : Widgets option to show/hide title
 
 = 1.5.1 =
 * Fix : bug fix

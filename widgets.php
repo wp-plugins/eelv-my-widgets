@@ -3,7 +3,7 @@
 Plugin Name: My shared widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.6.1
+Version: 1.6.2
 Author: bastho, EELV
 License: GPLv2
 Text Domain: eelv_widgets
@@ -83,7 +83,9 @@ class SharedWidgets{
 		  // select all blogs
 		  $offset=0;
 		  $limit=100;
-		  $count = get_site_option( 'blog_count' );
+		  $rb='SHOW TABLE STATUS LIKE \''.$wpdb->blogs.'\' ';
+		  $qb=$wpdb->get_row($rb);
+		  $count = $qb->Auto_increment;
 		  $widget_list = array();
 		   
 		   // Parse all widgets
@@ -375,17 +377,18 @@ function eelv_widget_callback($p){
 	$widget=get_blog_post($p_w[2], $p_w[3] );
 	$widget_id = $p_w[2].'_'.$p_w[3];
 	if(!isset($eelv_widget_options[$widget_id])) $eelv_widget_options[$widget_id]=array('show_title'=>1);
-	
+	switch_to_blog($p_w[2]);
 	echo $p['before_widget'];
 	if($eelv_widget_options[$widget_id]['show_title']=='1' && !empty($widget->post_title)){
 	    echo $p['before_title'];
-	    echo $widget->post_title;
+	    echo apply_filters('the_title',$widget->post_title);
 	    echo $p['after_title'];
 	}
     echo'<div class="wigeelv">'; 
     echo apply_filters('the_content',$widget->post_content);
     echo'</div>';
     echo $p['after_widget'];
+    restore_current_blog();
 }
 
 /*

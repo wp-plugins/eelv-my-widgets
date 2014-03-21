@@ -34,6 +34,11 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+= 1.6.2 =
+* Add : "the_title" filter to widgets title
+* Add : switch to blog to execute filters on the apporpriate blog
+* Fix : All blogs were not parsed if there were deleted blogs
+
 = 1.6.1 =
 * Add : "the_content" filter to widgets content
 
@@ -110,4 +115,5 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Upgrade notice ==
 
-No particular informations
+= 1.6.2 =
+the_title & the_content filters are applied, so widget's content can be different

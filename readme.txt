@@ -34,6 +34,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+= 1.6.1 =
+* Add : "the_content" filter to widgets content
+
 = 1.6.0 =
 * Add : Widgets option to show/hide title
 

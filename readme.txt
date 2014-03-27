@@ -34,6 +34,10 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+
+= 1.6.3 =
+* Fix : SQL optimization
+
 = 1.6.2 =
 * Add : "the_title" filter to widgets title
 * Add : switch to blog to execute filters on the apporpriate blog

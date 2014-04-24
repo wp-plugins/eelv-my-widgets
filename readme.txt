@@ -35,6 +35,10 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 == Changelog ==
 
 
+= 1.6.4 =
+* Fix : Optimize alert mail headers
+* Add : Widget content in the alert mail
+
 = 1.6.3 =
 * Fix : SQL optimization
 

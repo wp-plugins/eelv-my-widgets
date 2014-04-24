@@ -106,8 +106,10 @@ class SharedWidgets{
 			  endforeach;  
 			  $req=substr($req,0,-7);
 			  $widgets = $wpdb->get_results($req);
-			  foreach ($widgets as $wdg) {
-				  $widget_list['_'.$blog.'_'.$wdg->ID]=$wdg;
+			  if(is_array($widgets)){
+				  foreach ($widgets as $wdg) {
+					  $widget_list['_'.$blog.'_'.$wdg->ID]=$wdg;
+				  }
 			  }
 			  $offset=$s;
 		  }
@@ -237,8 +239,14 @@ class SharedWidgets{
 	  if($_POST['original_post_status']=='publish'){
 		  $action=__('updated','eelv_widgets');
 	  }
-	  
-	  mail($admin_mail ,__('New widget created and shared','eelv_widgets'),sprintf(__('A new widget "%$1$s" has been %$2$s and shared : %$3$s','eelv_widgets'),$wdg->post_title,$action,$wdg->guid),"From: ".$current_user->display_name."<".$current_user->user_email.">");
+		$eol="\r\n";
+		$headers = "From: ".$current_user->display_name."<".$current_user->user_email.">".$eol;
+		$headers .= 'Content-Type: text/html; charset=utf-8'.$eol;
+
+		$body='<h1>'.sprintf(__('A new widget "%s" has been %s and shared','eelv_widgets'),$wdg->post_title,$action).'</h1>'.$eol;
+		$body.='<p><a href="'.$wdg->guid.'" target="_blank">'.$wdg->guid.'</a></p>';
+		$body.='<hr>'.apply_filters('the_content',$wdg->post_content);
+	 	mail($admin_mail ,sprintf(__('A new widget has been %s and shared','eelv_widgets'),$action),$body,$headers,'-f '.$current_user->user_email);
 	  }
 	}
 	

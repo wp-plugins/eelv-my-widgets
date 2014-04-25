@@ -3,7 +3,7 @@ Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
 Requires at least: 3.7.0
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: /trunk
 License: GPLv2
 Network : 1

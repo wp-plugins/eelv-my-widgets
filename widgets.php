@@ -3,7 +3,7 @@
 Plugin Name: My shared widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.6.3
+Version: 1.6.4
 Author: bastho, EELV
 License: GPLv2
 Text Domain: eelv_widgets

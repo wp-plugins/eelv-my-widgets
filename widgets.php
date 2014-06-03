@@ -3,7 +3,7 @@
 Plugin Name: My shared widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.6.4
+Version: 1.6.5
 Author: bastho, EELV
 License: GPLv2
 Text Domain: eelv_widgets
@@ -208,6 +208,8 @@ class SharedWidgets{
 	function uptime(){
 		if(is_user_logged_in() && current_user_can('publish_posts') && isset($_GET['widget_id']) && is_numeric($_GET['widget_id'])){
 			wp_update_post(array('ID'=>$_GET['widget_id']));
+			//force cache refreshing
+	  		update_site_option( 'eelv_widgets_admin_cache_time',0);
 			echo $this->alive($_GET['widget_id']);
 		}
 		else{

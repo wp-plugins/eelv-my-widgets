@@ -3,7 +3,7 @@ Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
 Requires at least: 3.7.0
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: /trunk
 License: GPLv2
 Network : 1
@@ -34,6 +34,10 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+
+= 1.6.5 =
+* Fix : Refresh cache when just extending lifetime
+* Fix : Make extend button usable many times
 
 = 1.6.4 =
 * Fix : Optimize alert mail headers

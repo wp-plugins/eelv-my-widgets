@@ -35,6 +35,9 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 == Changelog ==
 
 
+= 1.6.6 =
+* Fix : Limit the search of widgets on available blogs
+
 = 1.6.5 =
 * Fix : Refresh cache when just extending lifetime
 * Fix : Make extend button usable many times

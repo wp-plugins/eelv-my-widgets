@@ -3,7 +3,7 @@
 Plugin Name: My shared widgets 
 Plugin URI: http://ecolosites.eelv.fr/widgets-personnalises/
 Description: create and share your text widgets in a multisites plateform
-Version: 1.6.5
+Version: 1.6.6
 Author: bastho, EELV
 License: GPLv2
 Text Domain: eelv_widgets
@@ -90,7 +90,7 @@ class SharedWidgets{
 		   
 		   // Parse all widgets
 		  for($s=0 ; $s<$count ; $s+=$limit){
-			  $blogs_list = wp_get_sites(array('limit'=>$limit,'offset'=>$offset));
+			  $blogs_list = wp_get_sites(array('limit'=>$limit,'offset'=>$offset,'deleted'=>false,'archived'=>false,'spam'=>false));
 			  
 			  // Construct the query on all blogs, splitted by 100 to prevent SQL to go away
 			  $date_limit='';

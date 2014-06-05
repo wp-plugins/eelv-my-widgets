@@ -1,10 +1,10 @@
 function emw_uptime(){
-    $('.eelv_widget_uptime').unbind('click').click(function(){
-        id = $(this).data('id');
-        var cible = $(this).parent().parent();
+    jQuery('.eelv_widget_uptime').unbind('click').click(function(){
+        id = jQuery(this).data('id');
+        var cible = jQuery(this).parent().parent();
         if(!isNaN(id)){
-            $(this).hide(500);
-            $.get(ajaxurl,{action:'eelv_widget_uptime',widget_id:id},function(retour){
+            jQuery(this).hide(500);
+            jQuery.get(ajaxurl,{action:'eelv_widget_uptime',widget_id:id},function(retour){
                 cible.html(retour); 
                 emw_uptime();
             },'html');
@@ -12,9 +12,9 @@ function emw_uptime(){
         return false;
     });
 }
-jQuery(document).ready(function($){
+jQuery(document).ready(function(){
 	emw_uptime();
-	if($('body').hasClass('widgets-php')){
+	if(jQuery('body').hasClass('widgets-php')){
 		//Widget page
 	}
 });

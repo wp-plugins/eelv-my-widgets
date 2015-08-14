@@ -13,12 +13,13 @@ create and share your text widgets in a multisites plateform
 == Description ==
 
 create a post-type widgets on a multisite plateform.
+
 Any "my widget" created appears as a widget in all sites and display the HTML source of the created widget.
 
 == Installation ==
 
 1. Upload `eelv_widgets` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress network admin
+2. Activate the plugin through the 'Plugins' menu in WordPress network admin
 
 == Frequently asked questions ==
 
@@ -28,8 +29,8 @@ Yes, It can be edited in the network admin. The default value is "no-expire"
 
 == Screenshots ==
 
-http://ecolosites.eelv.fr/files/2012/10/widgets.png
-http://ecolosites.eelv.fr/files/2012/10/widgets2.png
+1. Editor
+2. List of widgets
 
 == Changelog ==
 

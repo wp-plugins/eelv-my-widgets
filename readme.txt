@@ -1,13 +1,12 @@
 === My shared widgets ===
 Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
-Tags: widget, share, multisites
+Tags: widget, share, multisites, widgets, network, EELV
 Requires at least: 3.7.0
 Tested up to: 4.3
 Stable tag: /trunk
 License: GPLv2
-Network : 1
-Tags: widget, widgets, network, share, EELV
+Network: 1
 
 create and share your text widgets in a multisites plateform
 

@@ -3,7 +3,7 @@ Contributors: bastho, n4thaniel, ecolosites
 Donate link: 
 Tags: widget, share, multisites
 Requires at least: 3.7.0
-Tested up to: 3.9.1
+Tested up to: 4.3
 Stable tag: /trunk
 License: GPLv2
 Network : 1
@@ -34,6 +34,13 @@ http://ecolosites.eelv.fr/files/2012/10/widgets2.png
 
 == Changelog ==
 
+
+= 1.7 =
+release date: aug. 14 2015
+
+* WP 4.3 compliant
+* Use of native wp_mail function, more explicit notification
+* Code cleanup
 
 = 1.6.7 =
 * Fix : More flexible jQuery call
